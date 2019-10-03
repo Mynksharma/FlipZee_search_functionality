@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    function datatransfer(){
+        var inputvalue=document.getElementById("inputvalue").value;
+         var center=document.getElementById('cent');
+         
+        var xhttp=new XMLHttpRequest();
+		xhttp.onreadystatechange=function(){
+        if(this.readyState==4 && this.status==200){
+				var data=this.responseText;
+                var data=JSON.parse(data);
+                center.style.marginTop="100px";
+				while(center.firstChild){ 
+                center.removeChild(center.firstChild); 
+                 }
+                for(x of data){
+                    var tiles=document.createElement("div");
+                    var imagesection=document.createElement("div");
+                    var textsection=document.createElement("div");
+                    tiles.style.height="100px";
+                    tiles.style.width="80%";
+                    tiles.style.color="white";
+                    tiles.style.backgroundColor="black";
+                    tiles.style.margin="0 auto";
+                    tiles.style.marginBottom="20px";
+                    tiles.style.borderRadius="5px";
+                    
+                     imagesection.style.height="100px";
+                    imagesection.style.width="10%";
+                    imagesection.style.float="left";
+                    var image=document.createElement("div");
+                    image.classList.add("thumbnail");
+                    image.style.margin="10px";
+                    image.style.width="80px";
+                    image.style.height="80px";
+                    var img=document.createElement("img");
+		            img.setAttribute('src',"/images/posters9.jpg");
+                    img.style.height="100%";
+                    img.style.width="100%";
+                    image.appendChild(img);
+                    imagesection.appendChild(image);
+
+                    textsection.style.height="100px";
+                    textsection.style.width="90%";
+                    textsection.style.float="left";
+                    var moviename=document.createElement("div");
+                    moviename.style.height="60px";
+                    moviename.style.width="100%";moviename.style.padding="5px";
+                    var node=document.createTextNode(x['name']);
+                    moviename.style.fontSize="30px";
+                     moviename.style.fontStyle="italic";
+                    moviename.appendChild(node);
+                     textsection.appendChild(moviename);
+                    var language=document.createElement("div");
+                    language.style.height="30px";
+                    language.style.width="100%";language.style.padding="5px";
+                    var node=document.createTextNode("Language: "+x['language']);
+                    language.style.fontSize="18px"; 
+                    language.style.fontStyle="italic";
+                    language.appendChild(node);
+                    textsection.appendChild(language);
+
+                    tiles.appendChild(imagesection);
+                   tiles.appendChild(textsection);
+                    center.appendChild(tiles); 
+                }
+				}
+			}
+            xhttp.open("GET","/getdata?data="+inputvalue,true);xhttp.send(); 
+
+		}
+</script>
+<style>
+    body{
+        margin:0;padding:0;background-color: rgb(225, 238, 238);
+    }
+    .header{z-index:1;
+           position: fixed;
+           top:0;right:0;left:0;
+        min-height: 30px;
+        background-color: black;
+    }
+    .header-inner{padding:10px;
+        width:80%;
+        margin:0 auto;
+    }
+    img{
+        height:30px;
+    }
+.center{
+    position: absolute;margin:auto;height:500px;width:500px;
+     top:0;right:0;left:0;bottom:0;text-align:center;
+     color:rgb(70, 62, 62);
+
+}
+.cen-ser{ position: absolute;margin:auto;
+    font-size:200px;margin:auto;top:100px;right:0;left:0;
+}
+.center h1{ position: absolute;margin:auto; top:310px;right:0;left:0;}
+</style>
+<body>
+    <div class="header">
+        <div class="header-inner">
+            <img src="/images/fzlogo.png" />
+            <form class="form-inline" style="float:right" action="javascript:void(0);">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search for movies" id='inputvalue'/>
+                    <button type="submit" class="btn btn-danger" onclick="datatransfer();"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </form>
+        </div>
+    </div><div id="cent">
+         <div class="center" id="centerr">
+        <div class="glyphicon glyphicon-search cen-ser"></div>
+        <h1>Search...</h1>
+    </div>
+    </div>
+   
+</body>
+</html>
