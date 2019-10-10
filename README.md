@@ -1,5 +1,5 @@
 # FlipZee_search_functionality
-A smart search functionality 
+A smart search functionality built by using NodeJS. 
 ## Screenshots
 *Some Glimpses of the website:*
 <br/><br/>
