@@ -1,5 +1,5 @@
 # Smart_search_functionality
-A smart search functionality built by using NodeJS. 
+A smart search functionality built by using Node.js and Express. 
 ## Screenshots
 *Some Glimpses of the website:*
 <br/><br/>
